@@ -7,17 +7,16 @@ import kotlin.coroutines.CoroutineContext
  * Created by pphat on 6/19/2023.
  */
 
-fun CoroutineScope.launchOnBackground(
-    handleException: (CoroutineContext, Throwable) -> Unit,
+fun launchOnBackground(
     block: suspend CoroutineScope.() -> Unit
-) = launch(
-    Dispatchers.IO + CoroutineExceptionHandler(handleException),
+) = CoroutineScope(Dispatchers.IO).launch(
     start = CoroutineStart.DEFAULT,
     block = block
 )
 
-fun CoroutineScope.launchOnMain(block: suspend CoroutineScope.() -> Unit) = launch(
-    Dispatchers.Main,
+fun launchOnMain(
+    block: suspend CoroutineScope.() -> Unit
+) = CoroutineScope(Dispatchers.Main).launch(
     start = CoroutineStart.DEFAULT,
     block = block
 )

@@ -39,6 +39,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        loginViewModel?.executeLogin("android002@gmail.com", "1234567789")
+        loginViewModel?.executeLogin("android2002@gmail.com", "")
     }
 }

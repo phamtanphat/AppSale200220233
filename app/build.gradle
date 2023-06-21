@@ -59,4 +59,6 @@ dependencies {
 
     // SpinKit
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
 }
