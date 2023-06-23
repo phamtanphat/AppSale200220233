@@ -7,6 +7,6 @@ import com.example.appsale200220233.common.utils.ErrorResponse
  */
 sealed class AppResource<out T: Any> {
     data class SUCCESS<out T: Any>(val data: T?): AppResource<T>()
-    data class ERROR(val message: ErrorResponse): AppResource<Nothing>()
+    data class ERROR(val error: ErrorResponse): AppResource<Nothing>()
     object LOADING: AppResource<Nothing>()
 }
