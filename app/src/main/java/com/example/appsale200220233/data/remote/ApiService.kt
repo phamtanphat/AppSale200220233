@@ -14,4 +14,9 @@ interface ApiService {
     suspend fun signIn(
         @Body hashMap: Map<String, String>
     ): AppResponse<User>
+
+    @POST("user/sign-up")
+    suspend fun signUp(
+        @Body hashMap: Map<String, String>
+    ): AppResponse<User>
 }

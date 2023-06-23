@@ -18,4 +18,20 @@ class AuthenticationRepository {
         mapString["password"] = password
         return apiService.signIn(mapString)
     }
+
+    suspend fun requestRegister(
+        email: String,
+        password: String,
+        name: String,
+        phone: String,
+        address: String
+    ): AppResponse<User> {
+        val mapString = HashMap<String, String>()
+        mapString["email"] = email
+        mapString["password"] = password
+        mapString["name"] = name
+        mapString["phone"] = phone
+        mapString["address"] = address
+        return apiService.signUp(mapString)
+    }
 }

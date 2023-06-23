@@ -19,7 +19,6 @@ import com.example.appsale200220233.data.repository.AuthenticationRepository
 import com.example.appsale200220233.presentation.viewmodel.LoginViewModel
 import com.google.android.material.textfield.TextInputEditText
 
-
 class LoginActivity : AppCompatActivity() {
 
     private var loginViewModel: LoginViewModel? = null
@@ -28,12 +27,10 @@ class LoginActivity : AppCompatActivity() {
     private var textViewRegister: TextView? = null
     private var buttonSignIn: LinearLayout? = null
     private var viewLoading: LinearLayout? = null
-    private val REQUEST_CODE_REGISTER = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-
 
         initView()
 
@@ -87,8 +84,7 @@ class LoginActivity : AppCompatActivity() {
                 text = "Register",
                 context = this@LoginActivity
             ) {
-                val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
-                startActivityForResult(intent, REQUEST_CODE_REGISTER)
+                startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
             })
             textViewRegister?.text = this
             textViewRegister?.highlightColor = Color.TRANSPARENT
