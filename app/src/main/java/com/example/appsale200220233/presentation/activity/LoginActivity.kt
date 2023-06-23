@@ -1,34 +1,41 @@
 package com.example.appsale200220233.presentation.activity
 
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
+import android.text.SpannableStringBuilder
+import android.text.method.LinkMovementMethod
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.appsale200220233.R
+import com.example.appsale200220233.common.utils.SpannedUtils
 import com.example.appsale200220233.common.utils.ToastUtils
 import com.example.appsale200220233.data.remote.AppResource
 import com.example.appsale200220233.data.repository.AuthenticationRepository
 import com.example.appsale200220233.presentation.viewmodel.LoginViewModel
 import com.google.android.material.textfield.TextInputEditText
 
+
 class LoginActivity : AppCompatActivity() {
 
     private var loginViewModel: LoginViewModel? = null
     private var textEditEmail: TextInputEditText? = null
     private var textEditPassword: TextInputEditText? = null
+    private var textViewRegister: TextView? = null
     private var buttonSignIn: LinearLayout? = null
     private var viewLoading: LinearLayout? = null
+    private val REQUEST_CODE_REGISTER = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        textEditEmail = findViewById(R.id.textEditEmail)
-        textEditPassword = findViewById(R.id.textEditPassword)
-        buttonSignIn = findViewById(R.id.button_sign_in)
-        viewLoading = findViewById(R.id.layout_loading)
+
+
+        initView()
 
         loginViewModel = ViewModelProvider(this@LoginActivity, object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -37,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
         })[LoginViewModel::class.java]
 
         loginViewModel?.getLiveDataUser()?.observe(this@LoginActivity) {
-            when(it) {
+            when (it) {
                 is AppResource.LOADING -> viewLoading?.isVisible = true
                 is AppResource.ERROR -> {
                     viewLoading?.isVisible = false
@@ -61,4 +68,32 @@ class LoginActivity : AppCompatActivity() {
             loginViewModel?.executeLogin(email, password)
         }
     }
+
+    private fun initView() {
+        textEditEmail = findViewById(R.id.textEditEmail)
+        textEditPassword = findViewById(R.id.textEditPassword)
+        buttonSignIn = findViewById(R.id.button_sign_in)
+        viewLoading = findViewById(R.id.layout_loading)
+        textViewRegister = findViewById(R.id.text_view_register)
+
+        // Set text register can click
+        setTextRegisterCanClick()
+    }
+
+    private fun setTextRegisterCanClick() {
+        SpannableStringBuilder().apply {
+            append("Don't have an account?")
+            append(SpannedUtils.setClickColorLink(
+                text = "Register",
+                context = this@LoginActivity
+            ) {
+                val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+                startActivityForResult(intent, REQUEST_CODE_REGISTER)
+            })
+            textViewRegister?.text = this
+            textViewRegister?.highlightColor = Color.TRANSPARENT
+            textViewRegister?.movementMethod = LinkMovementMethod.getInstance()
+        }
+    }
+
 }
