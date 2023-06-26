@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            loginViewModel?.executeLogin(email, password)
+            loginViewModel?.executeLogin(this@LoginActivity, email, password)
         }
     }
 

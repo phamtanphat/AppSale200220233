@@ -5,4 +5,5 @@ package com.example.appsale200220233.common
  */
 object AppConstant {
     val BASE_URL = "https://serverappsale.onrender.com/"
+    val TOKEN_KEY = "token"
 }
