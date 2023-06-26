@@ -106,7 +106,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_sign_in"
         app:layout_constraintVertical_bias="0.85"
-        android:id="@+id/text_view_register"
+        android:id="@+id/text_view_navigate_register_activity"
         tools:text="Don't have an account?Register" />
 
     <include

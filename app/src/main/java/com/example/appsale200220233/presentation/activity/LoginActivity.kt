@@ -24,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
     private var loginViewModel: LoginViewModel? = null
     private var textEditEmail: TextInputEditText? = null
     private var textEditPassword: TextInputEditText? = null
-    private var textViewRegister: TextView? = null
+    private var tvNavigateRegisterActivity: TextView? = null
     private var buttonSignIn: LinearLayout? = null
     private var viewLoading: LinearLayout? = null
 
@@ -71,13 +71,13 @@ class LoginActivity : AppCompatActivity() {
         textEditPassword = findViewById(R.id.textEditPassword)
         buttonSignIn = findViewById(R.id.button_sign_in)
         viewLoading = findViewById(R.id.layout_loading)
-        textViewRegister = findViewById(R.id.text_view_register)
+        tvNavigateRegisterActivity = findViewById(R.id.text_view_navigate_register_activity)
 
         // Set text register can click
-        setTextRegisterCanClick()
+        makeTextNavigateRegisterActivity()
     }
 
-    private fun setTextRegisterCanClick() {
+    private fun makeTextNavigateRegisterActivity() {
         SpannableStringBuilder().apply {
             append("Don't have an account?")
             append(SpannedUtils.setClickColorLink(
@@ -86,10 +86,9 @@ class LoginActivity : AppCompatActivity() {
             ) {
                 startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
             })
-            textViewRegister?.text = this
-            textViewRegister?.highlightColor = Color.TRANSPARENT
-            textViewRegister?.movementMethod = LinkMovementMethod.getInstance()
+            tvNavigateRegisterActivity?.text = this
+            tvNavigateRegisterActivity?.highlightColor = Color.TRANSPARENT
+            tvNavigateRegisterActivity?.movementMethod = LinkMovementMethod.getInstance()
         }
     }
-
 }
