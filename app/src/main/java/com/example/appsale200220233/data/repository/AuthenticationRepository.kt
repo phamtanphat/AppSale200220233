@@ -1,5 +1,6 @@
 package com.example.appsale200220233.data.repository
 
+import android.content.Context
 import com.example.appsale200220233.data.model.AppResponse
 import com.example.appsale200220233.data.model.User
 import com.example.appsale200220233.data.remote.ApiService
@@ -9,8 +10,8 @@ import com.example.appsale200220233.data.remote.RetrofitClient
 /**
  * Created by pphat on 6/19/2023.
  */
-class AuthenticationRepository {
-    private var apiService: ApiService = RetrofitClient.getApiService()
+class AuthenticationRepository(var context: Context) {
+    private var apiService: ApiService = RetrofitClient.getApiService(context)
 
     suspend fun requestLogin(email: String, password: String): AppResponse<User> {
         val mapString = HashMap<String, String>()

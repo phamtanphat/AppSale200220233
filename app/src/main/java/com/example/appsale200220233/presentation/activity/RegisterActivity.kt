@@ -44,7 +44,7 @@ class RegisterActivity : AppCompatActivity() {
 
         registerViewModel = ViewModelProvider(this@RegisterActivity, object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return RegisterViewModel(AuthenticationRepository()) as T
+                return RegisterViewModel(AuthenticationRepository(this@RegisterActivity)) as T
             }
         })[RegisterViewModel::class.java]
 

@@ -36,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel = ViewModelProvider(this@LoginActivity, object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return LoginViewModel(AuthenticationRepository()) as T
+                return LoginViewModel(AuthenticationRepository(this@LoginActivity)) as T
             }
         })[LoginViewModel::class.java]
 
@@ -49,6 +49,9 @@ class LoginActivity : AppCompatActivity() {
                 }
                 is AppResource.SUCCESS -> {
                     viewLoading?.isVisible = false
+                    val intent = Intent(this@LoginActivity, ProductActivity::class.java)
+                    startActivity(intent)
+                    finish()
                     ToastUtils.showToast(this@LoginActivity, "Login is successfully")
                 }
             }
